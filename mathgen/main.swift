@@ -2,19 +2,17 @@
 //  main.swift
 //  mathgen
 //
-//  Created by Cole on 12/18/18.
-//  Copyright © 2018 at0mic. All rights reserved.
-//
-
 import Foundation
 let fileManager = FileManager.default
 
 // important variables
 var randomize = false
-
-
-
-
+var addition = false
+var multiply = false
+var subtract = false
+var divide = false
+var opName = "addition"
+var outDir = fileManager.currentDirectoryPath
 
 // argument handling
 for argument in CommandLine.arguments {
@@ -23,6 +21,19 @@ for argument in CommandLine.arguments {
 		randomize = true
 	case "-h":
 		showHelp()
+	case "-a":
+		addition = true
+	case "-m":
+		multiply = true
+	case "-s":
+		subtract = true
+	case "-d":
+		divide = true
+	case "-all":
+		addition = true
+		multiply = true
+		subtract = true
+		divide = true
 	default:
 		_ = 0
 	}
@@ -36,18 +47,46 @@ if let maxFromArgs: Int = Int(CommandLine.arguments[1]) {
 }
 
 
-// make sure max isnt nil, if it is set to 100
-
-
 // do the math
 print("processing \(max) lines")
-var out = adder(min: 0, max: max)
 
+if addition {
+	opName = "addition"
+	var out = adder(min: 0, max: max)
+	let outFile = "/\(opName).txt"
+	fileOut(dir: outDir, fileName: outFile, data: out)
+	if randomize {
+		out.shuffle()
+	}
+}
 
-// make outfile into a string fit for fileManager.fileExists
+if subtract {
+	opName = "subtract"
+	var out = subtracter(min: 0, max: max)
+	let outFile = "/\(opName).txt"
+	fileOut(dir: outDir, fileName: outFile, data: out)
+	if randomize {
+		out.shuffle()
+	}
+}
 
-var outDir = fileManager.currentDirectoryPath
-var outFile = "/output.txt"
+if multiply {
+	opName = "multiply"
+	var out = multiplier(min: 0, max: max)
+	let outFile = "/\(opName).txt"
+	fileOut(dir: outDir, fileName: outFile, data: out)
+	if randomize {
+		out.shuffle()
+	}
+}
 
-fileOut(dir: outDir, fileName: outFile)
+if divide {
+	opName = "divide"
+	var out = divider(min: 0, max: max)
+	let outFile = "/\(opName).txt"
+	fileOut(dir: outDir, fileName: outFile, data: out)
+	if randomize {
+		out.shuffle()
+	}
+}
 

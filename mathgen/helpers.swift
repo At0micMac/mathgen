@@ -11,14 +11,18 @@ import Foundation
 func showHelp() {
 	print("Usage: mathgen number -r")
 	print("number: the number to count to, default 100")
-	print("-r: randomize data")
+	print("-r: randomize the list")
+	print("-a: do addition list (default if none specified)")
+	print("-m: do multiplication list")
+	print("-s: do subtraction list")
+	print("-all: do all of the lists")
 	print("-h: show this help message")
-	print("\nsaves output.txt in working directory")
+	print("\nsaves (operation name).txt in working directory")
 	exit(0)
 }
 
 
-func fileOut(dir: String, fileName: String) {
+func fileOut(dir: String, fileName: String, data: [String]) {
 	
 	let outStr = "\(dir)\(fileName)"
 	let outURL = Foundation.URL(string: "file://\(outStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)")
@@ -38,17 +42,12 @@ func fileOut(dir: String, fileName: String) {
 			print("Failed to create file, \(error)")
 		}
 	}
-	
-	
-	// filewriter stuff
+	// write to end of file
 	if let fileUpdater = try? FileHandle(forUpdating: outURL!) {
 		// function which when called will cause all updates to start from end of the file
 		fileUpdater.seekToEndOfFile()
-		
 		// which lets the caller move editing to any position within the file by supplying an offset
-		for o in out {
-			fileUpdater.write((o + "\n").data(using: .utf8)!)
-		}
+		for o in data { fileUpdater.write((o + "\n").data(using: .utf8)!) }
 		//Once we convert our new content to data and write it, we close the file and that’s it!
 		fileUpdater.closeFile()
 	}
