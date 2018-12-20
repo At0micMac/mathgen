@@ -54,39 +54,39 @@ if addition {
 	opName = "addition"
 	var out = adder(min: 0, max: max)
 	let outFile = "/\(opName).txt"
-	fileOut(dir: outDir, fileName: outFile, data: out)
 	if randomize {
 		out.shuffle()
 	}
+	fileOut(dir: outDir, fileName: outFile, data: out)
 }
 
 if subtract {
 	opName = "subtract"
 	var out = subtracter(min: 0, max: max)
 	let outFile = "/\(opName).txt"
-	fileOut(dir: outDir, fileName: outFile, data: out)
 	if randomize {
 		out.shuffle()
 	}
+	fileOut(dir: outDir, fileName: outFile, data: out)
 }
 
 if multiply {
 	opName = "multiply"
 	var out = multiplier(min: 0, max: max)
 	let outFile = "/\(opName).txt"
-	fileOut(dir: outDir, fileName: outFile, data: out)
 	if randomize {
 		out.shuffle()
 	}
+	fileOut(dir: outDir, fileName: outFile, data: out)
 }
 
 if divide {
 	opName = "divide"
 	var out = divider(min: 0, max: max)
 	let outFile = "/\(opName).txt"
-	fileOut(dir: outDir, fileName: outFile, data: out)
 	if randomize {
 		out.shuffle()
 	}
+	fileOut(dir: outDir, fileName: outFile, data: out)
 }
 

@@ -62,8 +62,8 @@
 			isa = PBXGroup;
 			children = (
 				ED2D93F521C933E70063C71C /* main.swift */,
-				ED2D93FE21C9F84D0063C71C /* processors.swift */,
 				ED2D93FC21C9F2A50063C71C /* helpers.swift */,
+				ED2D93FE21C9F84D0063C71C /* processors.swift */,
 			);
 			path = mathgen;
 			sourceTree = "<group>";
