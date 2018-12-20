@@ -2,12 +2,9 @@
 //  helpers.swift
 //  mathgen
 //
-//  Created by Cole on 12/18/18.
-//  Copyright © 2018 at0mic. All rights reserved.
-//
-
 import Foundation
 
+// show help and exit
 func showHelp() {
 	print("Usage: mathgen number -r")
 	print("number: the number to count to, default 100")
@@ -21,34 +18,31 @@ func showHelp() {
 	exit(0)
 }
 
-
 func fileOut(dir: String, fileName: String, data: [String]) {
-	
+	// outStr to check if file exits, outURL for fileManager
 	let outStr = "\(dir)\(fileName)"
+	// convert string to URL
 	let outURL = Foundation.URL(string: "file://\(outStr.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)")
 	
+	// check if file exists
 	if fileManager.fileExists(atPath: outStr) {
 		print("File exists, append? [y/n]")
 		let ans = readLine()
 		if ans == "y" {
-			
-		} else {                   // creates new filename, loops back around. if exists it keeps counting up
+			// move along
+		} else {
 			print("exiting")
 			exit(1)
 		}
 	} else {
+		// if it doesn't exit, we create it
 		do { try "".write(to: outURL!, atomically: false, encoding: .utf8) }
-		catch {
-			print("Failed to create file, \(error)")
-		}
+		catch { print("Failed to create file, \(error)") }
 	}
 	// write to end of file
 	if let fileUpdater = try? FileHandle(forUpdating: outURL!) {
-		// function which when called will cause all updates to start from end of the file
-		fileUpdater.seekToEndOfFile()
-		// which lets the caller move editing to any position within the file by supplying an offset
-		for o in data { fileUpdater.write((o + "\n").data(using: .utf8)!) }
-		//Once we convert our new content to data and write it, we close the file and that’s it!
-		fileUpdater.closeFile()
+		fileUpdater.seekToEndOfFile()    // go to end of file
+		for o in data { fileUpdater.write((o + "\n").data(using: .utf8)!) }   // loop over the array
+		fileUpdater.closeFile()    // close file
 	}
 }

@@ -38,18 +38,17 @@ for argument in CommandLine.arguments {
 		_ = 0
 	}
 }
-let myPath = Foundation.URL(string: CommandLine.arguments[0])
+// how many lines to generate
 var max = 0
 if let maxFromArgs: Int = Int(CommandLine.arguments[1]) {
 	max = maxFromArgs
 } else {
-	max = 100
+	max = 100  // if it doesn't exist, default is 100
 }
 
-
-// do the math
 print("processing \(max) lines")
 
+// doing the actual math, then shuffe and save to disk
 if addition {
 	opName = "addition"
 	var out = adder(min: 0, max: max)
